@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import '../model/movie_model.dart';
 
 class Movie extends StatelessWidget {
   const Movie({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<MovieList> myMovies = MovieList.getMovieList();
+
     List movies = [
       "Titanic",
       "Age of twomorrow",
@@ -20,26 +23,43 @@ class Movie extends StatelessWidget {
       ),
       backgroundColor: Colors.teal[100],
       body: ListView.builder(
-        itemCount: movies.length,
+        itemCount: myMovies.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
             child: ListTile(
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 backgroundColor: Colors.tealAccent,
-                child: Text(
-                  "M",
-                  style: TextStyle(color: Colors.white),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "IMDB",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      myMovies[index].imdbRating,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               trailing: const Icon(Icons.abc),
-              subtitle: const Text("more"),
-              title: Text(movies[index]),
+              subtitle: Text(myMovies[index].director),
+              title: Text(myMovies[index].title),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return MovieDetails(movieName: movies[index]);
+                      return MovieDetails(movieName: myMovies[index].title);
                     },
                   ),
                 );
