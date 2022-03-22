@@ -25,7 +25,12 @@ class Movie extends StatelessWidget {
       body: ListView.builder(
         itemCount: myMovies.length,
         itemBuilder: (BuildContext context, int index) {
-          return MovieCard(context, myMovies[index]);
+          return Stack(
+            children: [
+              MovieCard(context, myMovies[index]),
+              MovieImage(myMovies[index].images[0]),
+            ],
+          );
           // return Card(
           //   child: ListTile(
           //     leading: CircleAvatar(
@@ -86,8 +91,9 @@ class Movie extends StatelessWidget {
         margin: const EdgeInsets.only(
           top: 5,
           right: 5,
+          left: 60,
         ),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width,
         height: 100,
         decoration: BoxDecoration(
@@ -95,7 +101,9 @@ class Movie extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(
+            left: 40,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -152,6 +160,24 @@ class Movie extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget MovieImage(String imageUrl) {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: 5,
+        left: 10,
+      ),
+      width: 100,
+      height: 100,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,
         ),
       ),
     );
