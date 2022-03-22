@@ -28,7 +28,7 @@ class Movie extends StatelessWidget {
           return Stack(
             children: [
               MovieCard(context, myMovies[index]),
-              MovieImage(myMovies[index].images[0]),
+              MovieImage(myMovies[index].images[3]),
             ],
           );
           // return Card(
@@ -77,6 +77,14 @@ class Movie extends StatelessWidget {
     );
   }
 
+  TextStyle MainTextStyle() {
+    return const TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 15,
+      color: Colors.grey,
+    );
+  }
+
   Widget MovieCard(BuildContext context, MovieList movieDetials) {
     return InkWell(
       onTap: () {
@@ -97,7 +105,7 @@ class Movie extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 100,
         decoration: BoxDecoration(
-          color: Colors.lightGreen,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Padding(
@@ -110,21 +118,19 @@ class Movie extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    movieDetials.title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.white,
+                  Flexible(
+                    child: Text(
+                      movieDetials.title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.teal,
+                      ),
                     ),
                   ),
                   Text(
-                    "Rating:${movieDetials.imdbRating}/10",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.white,
-                    ),
+                    movieDetials.imdbRating,
+                    style: MainTextStyle(),
                   ),
                 ],
               ),
@@ -134,27 +140,15 @@ class Movie extends StatelessWidget {
                 children: [
                   Text(
                     movieDetials.year,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.white,
-                    ),
+                    style: MainTextStyle(),
                   ),
                   Text(
                     movieDetials.runtime,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.white,
-                    ),
+                    style: MainTextStyle(),
                   ),
                   Text(
                     movieDetials.rated,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.white,
-                    ),
+                    style: MainTextStyle(),
                   ),
                 ],
               ),
