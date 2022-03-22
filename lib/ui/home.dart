@@ -192,7 +192,51 @@ class MovieDetails extends StatelessWidget {
         title: Text(movieName!),
         backgroundColor: Colors.teal,
       ),
-      backgroundColor: Colors.teal[100],
+      backgroundColor: Colors.white,
+      body: MovieDetailsThimblend(thimblend: movies!.images[3]),
+    );
+  }
+}
+
+class MovieDetailsThimblend extends StatelessWidget {
+  final String? thimblend;
+
+  const MovieDetailsThimblend({Key? key, this.thimblend}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(thimblend!),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          height: 80,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.transparent,
+                Colors.white,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
