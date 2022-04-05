@@ -197,6 +197,7 @@ class MovieDetails extends StatelessWidget {
         children: [
           MovieDetailsThimblend(thimblend: movies!.images[3]),
           MovieDetailsWithPoster(movie: movies as MovieList),
+          MovieDetailsCast(movie: movies as MovieList),
         ],
       ),
     );
@@ -281,7 +282,7 @@ class MoviePoster extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(16)),
         child: Container(
           width: MediaQuery.of(context).size.width / 4,
-          height: 160,
+          height: 110,
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
@@ -321,6 +322,57 @@ class MovieHeader extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class MovieDetailsCast extends StatelessWidget {
+  final MovieList movie;
+  const MovieDetailsCast({Key? key, required this.movie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          MovieField(field: "Directors:", value: movie.director),
+          const SizedBox(height: 10),
+          MovieField(field: "Writers:", value: movie.writer),
+          const SizedBox(height: 10),
+          MovieField(field: "Casts:", value: movie.actors),
+          const SizedBox(height: 10),
+          MovieField(field: "Awards:", value: movie.awards),
+        ],
+      ),
+    );
+  }
+}
+
+class MovieField extends StatelessWidget {
+  final String field;
+  final String value;
+  const MovieField({Key? key, required this.field, required this.value})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          field,
+          style: const TextStyle(
+            color: Colors.black38,
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: Text(value),
         ),
       ],
     );
