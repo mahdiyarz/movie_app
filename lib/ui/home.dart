@@ -258,6 +258,12 @@ class MovieDetailsWithPoster extends StatelessWidget {
       child: Row(
         children: [
           MoviePoster(poster: movie.images[2]),
+          const SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: MovieHeader(movie: movie),
+          ),
         ],
       ),
     );
@@ -284,6 +290,39 @@ class MoviePoster extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class MovieHeader extends StatelessWidget {
+  final MovieList movie;
+  const MovieHeader({Key? key, required this.movie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          movie.genre,
+          style: const TextStyle(
+            fontStyle: FontStyle.italic,
+            color: Colors.cyan,
+          ),
+        ),
+        Text.rich(
+          TextSpan(
+            style: const TextStyle(
+              fontWeight: FontWeight.w300,
+            ),
+            children: [
+              TextSpan(
+                text: movie.plot,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
