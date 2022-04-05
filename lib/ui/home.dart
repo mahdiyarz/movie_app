@@ -193,7 +193,12 @@ class MovieDetails extends StatelessWidget {
         backgroundColor: Colors.teal,
       ),
       backgroundColor: Colors.white,
-      body: MovieDetailsThimblend(thimblend: movies!.images[3]),
+      body: ListView(
+        children: [
+          MovieDetailsThimblend(thimblend: movies!.images[3]),
+          MovieDetailsWithPoster(movie: movies as MovieList),
+        ],
+      ),
     );
   }
 }
@@ -237,6 +242,48 @@ class MovieDetailsThimblend extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class MovieDetailsWithPoster extends StatelessWidget {
+  final MovieList movie;
+  const MovieDetailsWithPoster({Key? key, required this.movie})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          MoviePoster(poster: movie.images[2]),
+        ],
+      ),
+    );
+  }
+}
+
+class MoviePoster extends StatelessWidget {
+  final String poster;
+  const MoviePoster({Key? key, required this.poster}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        child: Container(
+          width: MediaQuery.of(context).size.width / 4,
+          height: 160,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(poster),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
